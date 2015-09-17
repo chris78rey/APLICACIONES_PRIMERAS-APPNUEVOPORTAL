@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      >
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>HOSPITAL DE ESPECIALIDADES DE LAS FUERZAS ARMADAS Nº1</title>
+
+                <link type="text/css" rel="stylesheet" href="/project/faces/javax.faces.resource/theme.css?ln=cupertino" />
+
+            </f:facet>
+        </h:head>
+       
+        
+        <h:body>
+            <p:layout style="background: blue" fullPage="true">
+
+                <p:layoutUnit  style="background: #c2dfef" position="north"   resizable="false" closable="true" collapsible="true">
+
+                    <center>
+
+                        <p:panel>
+
+                          <p:graphicImage value="#{resource['images/banner.png']}" style="width: 1600px; height: 200px"/>
+                                                  
+                        </p:panel>
+                        
+                    </center>
+                </p:layoutUnit>
+                <center>
+                <ui:insert  name="south">
+                    <p:layoutUnit style="background: #c2dfef" position="south" size="100" closable="true" collapsible="true">
+
+                        <br/>
+                            <p:clock  pattern="' Son las 'HH:mm:ss'  del  'dd' de 'MMMM' de 'yyyy" mode="server" />
+                        
+                      
+                  
+                        
+                    </p:layoutUnit>
+                </ui:insert>
+                    </center>
+                <ui:insert name="oculta_izq">
+                    <ui:insert name="west">
+                        <p:layoutUnit position="west" size="20%" header="HE1" collapsible="true">
+                            
+                            <ui:insert name="menuIzquierdo">
+
+                            </ui:insert>
+                        </p:layoutUnit>
+                    </ui:insert>
+                </ui:insert>
+
+
+
+
+
+                <p:layoutUnit style="background: #c2dfef" position="center">
+                    <ui:insert name="encabezadomenu">
+                        <center>
+                            <h:form id="formmenu">
+                                <h:panelGrid id="pg1"   columns="10"  width="75%">
+
+                                    <p:menubar style="font-size:15px; color:#D20005; font-weight: bold">
+                                        <ui:insert name="datosuser">
+                                            <p:submenu  style=" background-color: #c2dfef" label="Cedula:#{login.findByCedulaLogin.cedulaLogin}"/>
+                                            <p:submenu  style=" background-color: #c2dfef" label="Nombres:#{login.findByCedulaLogin.nombres}"/>
+                                            <p:submenu  style=" background-color: #c2dfef" label="Apellidos:#{login.findByCedulaLogin.apellidos}"/>
+                                            <p:submenu  style=" background-color: #c2dfef" label="Email:#{login.findByCedulaLogin.email}"/>
+                                        </ui:insert>
+                                    </p:menubar>
+                                    <ui:insert name="cambioclaves">
+                                        <p:commandLink id="actualizarDatos" action="/Login/TemplateClientActDatosPersonales" >
+                                            <p:graphicImage value="#{resource['images/icono5.png']}" style="width: 80px; height: 70px"/>
+                                            <p:effect type="pulsate" event="click" />
+                                        </p:commandLink>
+                                        
+                                        <p:commandLink action="/Login/TemplateClientSelOpcion" >
+                                            <p:graphicImage value="#{resource['images/icono6.png']}" style="width: 80px; height: 70px"/>
+                                            <p:effect type="pulsate" event="click" />
+                                        </p:commandLink>
+                                        
+                                        <p:commandLink action="/Login/TemplateClientCambioClave" >
+                                            <p:graphicImage value="#{resource['images/icono7.png']}" style="width: 80px; height: 70px"/>
+                                            <p:effect type="pulsate" event="click" />
+                                        </p:commandLink>
+                                    </ui:insert>
+                                    <p:commandLink action="#{login.logout()}" >
+                                            <p:graphicImage value="#{resource['images/icono8.png']}" style="width: 80px; height: 70px"/>
+                                            <p:effect type="pulsate" event="click" />
+                                     
+                    
+                           
+                                    </p:commandLink>
+                                    
+                                    
+
+                                </h:panelGrid> 
+
+
+
+                            </h:form>
+                        </center>
+                    </ui:insert>
+                    <ui:insert name="saltolinea">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                         
+                    </ui:insert>
+
+
+                    <center>
+                        <ui:insert name="center">
+
+
+
+
+
+                        </ui:insert>
+                    </center>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+      
+    </f:view>
+</html>
+

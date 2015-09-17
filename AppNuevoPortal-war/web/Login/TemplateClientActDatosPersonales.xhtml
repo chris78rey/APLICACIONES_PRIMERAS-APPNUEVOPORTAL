@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+            <ui:define name="south">
+                south
+            </ui:define>
+
+            <ui:define name="oculta_izq">
+                oculta_izq
+            </ui:define>
+
+
+
+            <ui:define name="saltolinea">
+
+
+            </ui:define>
+
+            <ui:define name="center">
+
+
+
+
+                <h:form>
+                    <h1><h:outputText value="Actualizar Datos Personales"/></h1>
+                    <p:panelGrid id="pg1" columns="2">
+
+                        <p:outputLabel style="font-size: 13px;color: #000000;font-weight: bold" value="Provincia de residencia:" />
+                        <p:inputText  size="60" style="font-size: 13px;background-color: seashell;color: #000000;font-weight: bold"  value="#{jSFManagedBeanActualizaDAtos.segUsuario.parroquias.cantones.provincias.provincia}" readonly="true"  />
+
+                        <p:outputLabel style="font-size: 13px;color: #000000;font-weight: bold"   value="Cantón de residencia:" />
+                        <p:inputText   size="60" style="font-size: 13px;background-color: seashell;color: #000000;font-weight: bold"  value="#{jSFManagedBeanActualizaDAtos.segUsuario.parroquias.cantones.canton}" readonly="true" />
+
+                        <p:commandLink style="font-family:arial,helvetica,sans-serif;font-size:18px;color: darkblue;" update="carDetail" oncomplete="PF('carDialog').show()"  value="Parroquia de residencia:" />
+                        <p:inputText id="TDIR"  size="60" style="font-size: 13px;background-color: seashell;color: #000000;font-weight: bold"  value="#{jSFManagedBeanActualizaDAtos.segUsuario.parroquias.parroquia}" readonly="true" />
+
+                        <p:outputLabel  style="font-size: 13px;color: #000000;font-weight: bold" value="Direccion de Domicilio:" for="direccionDomicilio" />
+                        <p:inputText  size="60" style="font-size: 13px;color: #000000;font-weight: bold" id="direccionDomicilio" value="#{jSFManagedBeanActualizaDAtos.segUsuario.direccionDomicilio}" title="DireccionDomicilio" />
+
+                        <p:outputLabel style="font-size: 13px;color: #000000;font-weight: bold"   value="Email:" for="email" />
+                        <p:inputText size="60" style="font-size: 13px;color: #000000;font-weight: bold"  id="email" value="#{jSFManagedBeanActualizaDAtos.segUsuario.email}" title="Email" />
+                        <p:outputLabel   style="font-size: 13px;color: #000000;font-weight: bold"  value="Telefono:" for="telefono" />
+                        <p:inputText  size="60" maxlength="10" style="font-size: 13px;color: #000000;font-weight: bold" id="telefono" value="#{jSFManagedBeanActualizaDAtos.segUsuario.telefono}" title="Telefono" />
+                        <p:outputLabel  style="font-size: 13px;color: #000000;font-weight: bold" value="Celular:" for="celular" />
+                        <p:inputText size="60" maxlength="10" style="font-size: 13px;color: #000000;font-weight: bold" id="celular" value="#{jSFManagedBeanActualizaDAtos.segUsuario.celular}" title="Celular" />
+
+                    </p:panelGrid>
+                    <h:panelGroup>
+                        <p:commandButton   style="font-size: 13px;"  action="#{jSFManagedBeanActualizaDAtos.cambiarDatos()}" process="@this direccionDomicilio email telefono celular" update="@this"  value="Guardar">
+                            <p:confirm header="Confirmation" message="Esta seguro de actualizar el registro?" icon="ui-icon-trash" />
+                        </p:commandButton>
+                    </h:panelGroup>
+
+                    <p:confirmDialog style="font-size: 13px;"  global="true" showEffect="fade" hideEffect="explode">
+                        <p:commandButton value="Sí" update="@this" process="@this" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+                    <p:dialog header="Editar datos de residencia" style="font-size: 9px;width: 200px"  widgetVar="carDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="true">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2"  columnClasses="label,value">
+
+                                <h:outputText style="font-size: 13px;"  value="Provincia Residencia:" />
+                                <p:selectOneMenu   style="font-size: 13px;width: 400px" value="#{jSFManagedBeanActualizaDAtos.provincias.codigo}"  height="200"  >
+                                    <f:selectItem itemLabel="Choose item" noSelectionOption="true" />
+                                    <f:selectItems value="#{jSFManagedBeanActualizaDAtos.provinciases}" var="item" itemLabel="#{item.provincia}" itemValue="#{item.codigo}"  />
+                                    <p:ajax event="change" process="@this" update="@this cantonesm parroqu" listener="#{jSFManagedBeanActualizaDAtos.listen1(event)}" />
+                                </p:selectOneMenu>
+                                <h:outputText style="font-size: 13px;"  value="Cantón de Residencia:" />
+                                <p:selectOneMenu  id="cantonesm" value="#{jSFManagedBeanActualizaDAtos.can}"  style="font-size: 13px;;width: 400px"  height="200"  >
+                                    <f:selectItem itemLabel="Choose item" noSelectionOption="true" />
+                                    <f:selectItems value="#{jSFManagedBeanActualizaDAtos.lcantones}" var="item" itemLabel="#{item.canton}" itemValue="#{item.cantonesPK.codigo}"  />
+                                    <p:ajax event="change" process="@this" update="@this parroqu" listener="#{jSFManagedBeanActualizaDAtos.listen2(event)}"  />
+                                </p:selectOneMenu>
+                                <h:outputText style="font-size: 13px;"  value="Parroquía Residencia:" />
+                                <p:selectOneMenu  id="parroqu"  style="font-size: 13px;width: 400px"   value="#{jSFManagedBeanActualizaDAtos.parr}" height="200"  >
+                                    <f:selectItem itemLabel="Choose item" noSelectionOption="true" />
+                                    <f:selectItems value="#{jSFManagedBeanActualizaDAtos.lparr}" var="item" itemLabel="#{item.parroquia}" itemValue="#{item.parroquiasPK.codigo}"  />
+                                    <p:ajax event="change" process="@this" update="@this"   listener="#{jSFManagedBeanActualizaDAtos.listen3(event)}"  />
+                                </p:selectOneMenu>
+
+                            </p:panelGrid>
+                            <h:panelGroup>
+                                <p:commandButton   style="font-size: 13px;"  action="#{jSFManagedBeanActualizaDAtos.cambiarPCP}" process="@form" update="@form"  value="Guardar"/>
+                            </h:panelGroup>
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

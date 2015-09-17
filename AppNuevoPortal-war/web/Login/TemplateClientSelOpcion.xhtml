@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      >
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+            <ui:define name="oculta_izq"/>
+            <ui:define name="saltolinea">
+
+            </ui:define>
+            <ui:define name="south"/>
+            <ui:define name="center">
+                <h:form>  
+                    <div align="center">                   
+                        <h:panelGrid rendered="#{login.existefoto==1}" border="1" style="width: 75px;height: 75px" >
+                            <p:graphicImage id="img1"   url="#{login.urlFoto}#{login.findByCedulaLogin.cedulaLogin}" width="100px" height="100px"/>
+                        </h:panelGrid>
+                    </div>
+                    <center>
+                       <!--<p:graphicImage value="#{resource['images/welcome3.gif']}" style="width: 120px; height: 80px"/> 3.5-->
+                      <p:graphicImage value="#{resource['images/welcome3.gif']}" style="width: 08%; height: 4%"/>
+                        <h1 style="color: darkblue">
+                            Escoja la Opción
+                            
+                        </h1>
+                        
+                    <!-- <p:graphicImage value="#{resource['images/escoja opcion.gif']}" style="width: 70px; height: 80px"/> -->
+                       <!-- <p:graphicImage value="#{resource['images/escoja opcion.gif']}" style="width: 03%; height: 05%"/> --> 
+                        <h:panelGrid border="0" columns="1">   
+                            
+                            <h:panelGrid columns="1"  >
+                                <h:panelGroup rendered="#{imagesView.tamanio lt 1000 }"  >
+                                    <table width="100%">
+                                        <tr>
+                                            <ui:repeat   value="#{imagesView.data}" var="item" id="manuelSwitcherImages">
+                                                <td width="15%">
+                                                    <center> 
+                                                        <h1>
+                                                            <p:outputLabel style="font-size: 18px;text-align: center"/>
+                                                        </h1>  
+
+                                                    </center>
+                                                </td>
+
+                                            </ui:repeat>
+                                        </tr>
+                                        <tr>
+                                            <ui:repeat   value="#{imagesView.data}" var="item" id="manuelSwitcherImages2">
+                                                <td width="15%">
+                                                    <center> 
+                                                        <p:outputLabel style="font-size: 13px;text-align: center" value="#{item.MOD_TITULO}" />    
+
+                                                    </center>
+                                                </td>
+
+                                            </ui:repeat>
+                                        </tr>
+                                        <tr>
+                                            <ui:repeat   value="#{imagesView.data}" var="item" id="manuelSwitcherImages3">
+                                                <td width="15%">
+                                                    <center> 
+
+                                                        <a style="font-size: 21px;"  href="#{item.MOD_URL}#{imagesView.usuId}&amp;ldmjcgd=#{item.MOD_ID}">    
+                                                            <h:panelGrid>  
+                                                                <p:graphicImage  url="#{item.MOD_LOGO_NAME}"     style="font-size: 13px;width: 123px;height: 123px" title="#{item.MOD_TITULO}"/> 
+                                                            </h:panelGrid>  
+                                                        </a>
+                                                        
+                                                    </center>
+                                                </td>
+
+                                            </ui:repeat>
+                                            
+                                        </tr>
+
+                                    </table>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                           
+                        </h:panelGrid>
+                    </center>
+                     
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

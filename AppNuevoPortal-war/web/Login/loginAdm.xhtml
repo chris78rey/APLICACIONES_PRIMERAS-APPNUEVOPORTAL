@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      >
+
+    <body>
+        <ui:composition template="./../template/Template.xhtml">
+
+
+            <ui:define name="west">
+
+            </ui:define>
+            <ui:define name="encabezadomenu"/>
+            <ui:define name="center">
+                    
+                <h:form>
+                     
+                    <pe:tooltip   global="true" myPosition="left center" atPosition="right center"/>   
+                    <p:growl id="growl" life="2000" />
+                    <center>
+                    <p:graphicImage value="#{resource['images/ambu3.gif']}" style="width: 5%; height: 7%"/>  
+                    <!--<p:graphicImage value="#{resource['images/avionfinal.gif']}" style="width: 70px; height: 85px"/>-->
+               </center>
+                    <p:outputLabel style="font-size: x-large" value="Portal de Servicios"  />
+                    
+                    <br/>
+                    <br/>
+              
+
+                    <table width="0%" border="0" align="center">
+                        <tr>
+                            <td>
+                                <p:outputLabel value="Usuario:"  />
+                            </td>
+                            <td>
+                                <p:autoComplete style="font-size: 13px;"  id="usuario" value="#{login.usuario}" 
+                                                completeMethod="#{login.completeText}" title="Debe ingresar su cédula o documento de identificación que tenga registrado dentro del Sistema de Gestión Hospitalario"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="Clave:"  />
+                            </td>
+                            <td>
+                                <p:password  style="font-size: 13px;"   value="#{login.password1}" title="Ingrese su clave, esta es su misma identificación si es la primera vez que ingresa, se le pedira que coloque una nueva clave y además que registre un correo electrónico donde se le pueda enviar sus notificaciones"  />
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <center>
+                        <br/>
+
+                        <p:commandButton style="font-size: 13px;"  value="Ingresar" id="ajax" 
+                                         update="growl" 
+                                         actionListener="#{login.buttonActionPersonal}" action="#{login.accionIngresoPersonal()}" styleClass="ui-priority-primary" />
+                        
+                        
+                        <br/>
+                        <br/>
+               
+                     
+
+                        <p style="font-family:arial,helvetica,sans-serif;font-size: 12px;font-weight: bold">
+                            Ojo: usted debe tener un correro electrónico "<p:outputLabel style="font-size: 16px;"  value="Válido"/>" asociado a su cuenta para poder reestablecer la contraseña
+
+                        </p>  
+
+                        <p style="font-family:arial,helvetica,sans-serif;font-size: 14px;font-weight: bold">
+                            Olvidó su contraseña, por favor de click en este 
+                            <p:commandLink style="color: #D20005;font-weight: bold" value="LINK" action="/Login/TemplateClientOlvidoClave" />
+<br/>
+
+</p>
+     
+                       
+                     <!-- <p:graphicImage value="#{resource['images/tiwisanidad.png']}" style="width: 130px; height: 135px"/>  -->
+                     <p:graphicImage value="#{resource['images/tiwisanidad.png']}" style="width: 5%; height: 6%"/>
+                    </center>
+                   
+                    
+                    
+                        
+                                             
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

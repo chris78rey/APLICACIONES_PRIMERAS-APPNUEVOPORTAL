@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      >
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml"> 
+
+
+
+
+            <ui:define name="oculta_izq">
+                oculta_izq
+            </ui:define>
+
+            <ui:define name="cambioclaves"/>
+            <ui:define name="datosuser"/>
+            <ui:define name="saltolinea"/>
+
+
+            <ui:define name="encabezadomenu"/>
+            <ui:define name="center">
+
+                <center>
+                    <h:form id="f1">
+                        <pe:ajaxErrorHandler /> 
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <p:growl id="message"  autoUpdate="true"/>  
+                        <pe:tooltip   global="true" myPosition="left center" atPosition="right center"/> 
+                        <p:outputLabel style="font-size: x-large"  value="Reseteo de Claves"  />
+                        <p:panelGrid style="font-size: 13px;width: 0%"   columns="2"  >
+                            <h:outputText style="font-size: 13px;"   value="Cédula de identidad:" />
+                            <p:inputText id="slide" style="font-size: 13px;"  value="#{reiniciaClave.cedularecuperaclave2}" readonly="false"  size="15" title="Ingrese su cédula de identidad y se le enviará a su correo electrónico registrado un lik el cual deberá digitar para que su clave sea reseteada">
+                                <p:ajax event="change" listener="#{reiniciaClave.listen(event)}"/>
+                            </p:inputText>
+
+                        </p:panelGrid>
+                        <p:commandButton   value="Grabar" action="#{reiniciaClave.resetClave()}" process="@form" update="@form message"  
+                                           title="Enviar el link a su cuenta de correo" style="margin-top: 10px;font-size: 13px">
+                            <p:confirm header="Confirmación" message="Al aceptar se le enviará un correo a su cuenta registrada en el sistema"  icon="ui-icon-alert" />
+                        </p:commandButton>
+                        <p:confirmDialog style="font-size: 11px;"  global="true" showEffect="fade" hideEffect="explode">
+                            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </h:form>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
